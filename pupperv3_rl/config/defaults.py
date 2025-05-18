@@ -10,7 +10,8 @@ def get_simulation_config():
     # Model configuration
     config.model_repo = 'https://github.com/g-levine/pupper_v3_description'
     config.model_branch = 'master'
-    config.model_path = "model_with_obstacles.xml"
+    config.original_model_path = "pupper_v3_description/description/mujoco_xml/pupper_v3_complete.mjx.position.no_body.self_collision.two_iterations.xml"
+    config.model_path = "pupper_v3_description/description/mujoco_xml/model_with_obstacles.xml"
     
     # Model body names
     config.upper_leg_body_names = ["leg_front_r_2", "leg_front_l_2", "leg_back_r_2", "leg_back_l_2"]
@@ -37,7 +38,7 @@ def get_simulation_config():
 
 def get_training_config():
     """Returns the default training configuration."""
-    from pupperv3_rl.environment.randomization import StartPositionRandomization
+    from pupperv3_mjx.domain_randomization import StartPositionRandomization
     
     config = config_dict.ConfigDict()
     
@@ -50,7 +51,7 @@ def get_training_config():
     # PPO params
     config.ppo = config_dict.ConfigDict()
     config.ppo.num_timesteps = 500_000_000
-    config.ppo.episode_length = 300
+    config.ppo.episode_length = 500
     config.ppo.num_evals = 11
     config.ppo.reward_scaling = 1
     config.ppo.normalize_observations = True
@@ -177,7 +178,7 @@ def get_reward_config():
     config.rewards.scales.tracking_orientation = 0.5
     
     # Regularization terms
-    config.rewards.scales.lin_vel_z = 0.2
+    config.rewards.scales.lin_vel_z = -0.1
     config.rewards.scales.ang_vel_xy = -0.002
     config.rewards.scales.orientation = -0.0
     config.rewards.scales.torques = -0.025
@@ -190,7 +191,6 @@ def get_reward_config():
     config.rewards.scales.abduction_angle = -0.01
     config.rewards.scales.termination = -100.0
     config.rewards.scales.foot_slip = -0.2
-    config.rewards.scales.foot_pos_diff = -1.0
     config.rewards.scales.knee_collision = -10.0
     config.rewards.scales.body_collision = -0.5
     

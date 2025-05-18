@@ -12,7 +12,7 @@ from brax import envs
 from pathlib import Path
 
 from pupperv3_rl.config.loader import load_config
-from pupperv3_rl.visualization.plotting import (
+from pupperv3_mjx.plotting import (
     plot_multi_series, 
     plot_reward_components, 
     plot_joint_positions, 
@@ -20,7 +20,7 @@ from pupperv3_rl.visualization.plotting import (
 )
 
 # Import these to register the environment
-from pupperv3_rl.environment.pupperv3_env import PupperV3Env
+from pupperv3_mjx.environment import PupperV3Env
 
 # For policy loading
 from brax.training.agents.ppo import networks as ppo_networks

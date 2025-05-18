@@ -10,7 +10,7 @@ import numpy as np
 from ml_collections import config_dict
 
 from pupperv3_rl.config.loader import load_config
-from pupperv3_rl.export.converter import convert_params
+from pupperv3_mjx import export
 
 # For policy loading
 from brax.training.agents.ppo import networks as ppo_networks
@@ -51,7 +51,7 @@ def export_policy(
         final_activation: Final activation function.
     """
     # Convert parameters
-    rtneural_params = convert_params(
+    rtneural_params = export.convert_params(
         params=params,
         activation=config.policy.activation,
         action_scale=config.policy.action_scale,
